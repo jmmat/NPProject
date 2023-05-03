@@ -7,13 +7,19 @@
 
 import sys
 
+def is_valid_coloring(graph, coloring):
+    for vertex, color in coloring.items():
+        for neighbor in graph[vertex]:
+            if color == coloring[neighbor]:
+                return False
+    return True
+
 def greedy_graph_coloring(G):
     color = {} # dictionary to store the assigned color of each vertex
     for v in range(len(G)):
-        # Correct the used_colors set construction
-        used_colors = set(color[u] for u in G[v+1] if u in color)
+        used_colors = set(color[u] for u in G[v+1] if u in color and u != v + 1)
         if not used_colors:
-            color[v+1] = 1 # assign the first available color
+            color[v+1] = 0 # assign the first available color
         else:
             color[v+1] = min(c for c in range(1, len(G)+1) if c not in used_colors) # assign the lowest available color
     return color
@@ -30,11 +36,13 @@ def main():
 
     # Compute the graph coloring using the Greedy algorithm
     color = greedy_graph_coloring(G)
-
+    
+    print(is_valid_coloring(G, color))
+    
     # Print the assigned color of each vertex
-    print("Assigned colors:")
-    for v in sorted(color):
-        print("Vertex {}: color {}".format(v, color[v]))
+    print(len(set(color.values())))
+    for v in sorted(color, reverse=True):
+        print(v, color[v])
 
 if __name__ == "__main__":
     main()
