@@ -43,6 +43,6 @@ where input_file is the path to the input file. For example, if the input file i
 
 css
 Copy code
-python graph_coloring.py input.txt
+python cs412_mingraphcolor_approx.py input.txt
 This will run the program on the input graph specified in input.txt and output the results to the terminal.
 
