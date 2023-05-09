@@ -1,5 +1,5 @@
+import sys
 import time
-import random
 import itertools
 
 
@@ -43,54 +43,17 @@ def graph_from_file(filename):
     return g
 
 
-def generate_random_graph(x, min_colors):
-    max_vertexes = x + 1
-    edges = set()
-
-    # Create a clique with min_colors number of vertices
-    vertices = list(range(1, min_colors + 1))
-    for i in range(min_colors):
-        for j in range(i + 1, min_colors):
-            v1 = vertices[i]
-            v2 = vertices[j]
-            edges.add((v1, v2))
-
-    # Add the remaining edges randomly
-    while len(edges) < x:
-        v1 = random.randint(1, max_vertexes)
-        v2 = random.randint(1, max_vertexes)
-
-        if v1 != v2 and (v1, v2) not in edges and (v2, v1) not in edges:
-            edges.add((v1, v2))
-
-    return edges
-
-
-def write_graph_to_file(graph, filename):
-    with open(filename, 'w') as f:
-        f.write(f"{len(graph)}\n")
-        for edge in graph:
-            f.write(f"{edge[0]} {edge[1]}\n")
-
-
-def generate(edges, min_colors):
-    num_edges = int(edges)
-    random_graph = generate_random_graph(num_edges, int(min_colors))
-    output_file = f"./Data/graph_{num_edges}_edges_{min_colors}_colors.txt"
-    write_graph_to_file(random_graph, output_file)
-
-
-def main():
-    for i in range(5, 30, 1):
-        print(f"for {i} minimum colors")
-        generate(i, i)
-        g = graph_from_file(f"./Data/graph_{i}_edges_{i}_colors.txt")
-        start_time = time.time()
-        colors, assigned_colors = min_graph_coloring(g)
-        elapsed_time = time.time() - start_time
-        print(f"Elapsed time: {elapsed_time:.5f} seconds")
-        print(f"{check_valid_coloring(g, assigned_colors)} {colors}\n")
+def main(filename):
+    print(filename)
+    g = graph_from_file(filename)
+    start_time = time.time()
+    colors, assigned_colors = min_graph_coloring(g)
+    elapsed_time = time.time() - start_time
+    start_time = time.time()
+    print(f"Elapsed time: {elapsed_time:.5f} seconds")
+    print(
+        f"Is valid solution: {check_valid_coloring(g, assigned_colors)}\nNumber of colors: {colors}")
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
