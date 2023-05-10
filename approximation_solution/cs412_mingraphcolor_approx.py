@@ -25,6 +25,7 @@
 # However, it usually produces a coloring that uses a small number of colors.
 
 import sys
+import time
 
 def is_valid_coloring(graph, coloring):
     for vertex, color in coloring.items():
@@ -58,8 +59,11 @@ def main():
             G[u].add(v)
             G[v].add(u)
 
+    start_time = time.time()
     # Compute the graph coloring using the Greedy algorithm
     color = greedy_graph_coloring(G)
+    elapsed_time = time.time() - start_time
+    print(f"Elapsed time: {elapsed_time:.5f} seconds")
     
     print(is_valid_coloring(G, color))
     
