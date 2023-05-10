@@ -38,11 +38,11 @@ Running the Program
 To run the program, open a terminal and navigate to the directory containing the program file (graph_coloring.py) and the input file. Then, run the following command:
 
 Copy code
-python graph_coloring.py input_file
+python cs412_mingraphcolor_approx.py input_file
 where input_file is the path to the input file. For example, if the input file is in the same directory as the program file, you can run:
 
 css
 Copy code
-python graph_coloring.py input.txt
+python cs412_mingraphcolor_approx.py input_file
 This will run the program on the input graph specified in input.txt and output the results to the terminal.
 
