@@ -2,6 +2,7 @@
     name: Duy Bui, Tomas Castillo, Justin Martin
     
 """
+
 # All modules for CS 412 must include a main method that allows it
 # to imported and invoked from other python scripts
 
