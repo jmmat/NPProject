@@ -81,15 +81,20 @@ def generate(edges, min_colors):
 
 
 def main():
-    for i in range(5, 30, 1):
-        print(f"for {i} minimum colors")
-        generate(i, i)
-        g = graph_from_file(f"./Data/graph_{i}_edges_{i}_colors.txt")
-        start_time = time.time()
-        colors, assigned_colors = min_graph_coloring(g)
-        elapsed_time = time.time() - start_time
-        print(f"Elapsed time: {elapsed_time:.5f} seconds")
-        print(f"{check_valid_coloring(g, assigned_colors)} {colors}\n")
+    N = int(input())
+    g = {}
+    for _ in range(N):
+        u, v = input().split()
+        if u not in g:
+            g[u] = set()
+        if v not in g:
+            g[v] = set()
+        g[u].add(v)
+        g[v].add(u)
+    colors, assigned_colors = min_graph_coloring(g)
+    print(colors)
+    for u in assigned_colors:
+        print(u, assigned_colors[u])
 
 
 if __name__ == "__main__":
