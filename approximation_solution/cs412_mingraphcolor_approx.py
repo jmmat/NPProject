@@ -45,19 +45,13 @@ def greedy_graph_coloring(G):
     return color
 
 def main():
-    # Read graph data from file
-    if len(sys.argv) < 2:
-        print("Usage: python graph_coloring.py input_file")
-        sys.exit(1)
-    
-    input_file = sys.argv[1]
-    with open(input_file, 'r') as f:
-        n = int(f.readline().strip())
-        G = {i: set() for i in range(1, n+1)}
-        for line in f:
-            u, v = map(int, line.split())
-            G[u].add(v)
-            G[v].add(u)
+    # Read graph data from standard input
+    n = int(input().strip())
+    G = {i: set() for i in range(1, n+1)}
+    for line in sys.stdin:
+        u, v = map(int, line.split())
+        G[u].add(v)
+        G[v].add(u)
 
     start_time = time.time()
     # Compute the graph coloring using the Greedy algorithm
