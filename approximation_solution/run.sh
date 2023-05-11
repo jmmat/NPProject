@@ -7,7 +7,7 @@ cd ./test_cases
 for file in *.txt
 do
   # execute the Python file in the background
-  python3 "../cs412_mingraphcolor_approx.py" "$file" &
+  cat "$file" | python3 "../cs412_mingraphcolor_approx.py" &
 done
 
 # wait for all background processes to finish
